@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "basic_ingot",
+  "ingredients": [
+    {
+    "item": "playerzerotestmod:basic_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "playerzerotestmod:basic_ingot"
+  }
+}

@@ -1,7 +1,12 @@
 package net.SilentPlayerZero.playerzerotestmod;
 
 import com.mojang.logging.LogUtils;
+import net.SilentPlayerZero.playerzerotestmod.Items.ModCreativeModeTabs;
+import net.SilentPlayerZero.playerzerotestmod.Items.ModItems;
+import net.SilentPlayerZero.playerzerotestmod.block.ModBlocks;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.CreativeModeTabSearchRegistry;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -23,6 +28,11 @@ public class PlayerZeroTestMod {
     public PlayerZeroTestMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        ModCreativeModeTabs.register(modEventBus);
+
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
+
         modEventBus.addListener(this::commonSetup);
 
         MinecraftForge.EVENT_BUS.register(this);
@@ -35,9 +45,10 @@ public class PlayerZeroTestMod {
 
     }
 
-    private void addCreative(BuildCreativeModeTabContentsEvent event)
-    {
-
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItems.BASIC_INGOT);
+        }
     }
 
     @SubscribeEvent
